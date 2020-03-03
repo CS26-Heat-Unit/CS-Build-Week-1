@@ -104,12 +104,12 @@ WSGI_APPLICATION = 'adv_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+    # 'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
+# }
 
 # The idea here is to clear the DATABASES variable and then set the 'default' key using the dj_database_url module.
 # This module uses Heroku’s DATABASE_URL variable if it’s on Heroku, or it uses the DATABASE_URL we set in the .env
