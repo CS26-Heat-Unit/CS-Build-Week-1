@@ -13,8 +13,15 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 from decouple import config
 
+import dj_database_url
+import dotenv
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -104,6 +111,12 @@ DATABASES = {
     }
 }
 
+# The idea here is to clear the DATABASES variable and then set the 'default' key using the dj_database_url module.
+# This module uses Heroku’s DATABASE_URL variable if it’s on Heroku, or it uses the DATABASE_URL we set in the .env
+# file if we’re working locally.
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -158,3 +171,5 @@ STATIC_URL = '/static/'
 import django_heroku
 
 django_heroku.settings(locals())
+# sslmode issue workaround
+del DATABASES['default']['OPTIONS']['sslmode']
