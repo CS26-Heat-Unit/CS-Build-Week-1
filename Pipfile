@@ -17,6 +17,7 @@ django-rest-api = "*"
 graphene = "*"
 graphene-django = "*"
 schema = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
