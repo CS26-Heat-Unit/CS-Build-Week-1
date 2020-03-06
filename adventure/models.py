@@ -40,6 +40,9 @@ class Room(models.Model):
     def playerUUIDs(self, currentPlayerID):
         return [p.uuid for p in Player.objects.filter(currentRoom=self.id) if p.id != int(currentPlayerID)]
 
+    # H#RE
+    # def __str__(self):
+        # return f'ID: {self.id}. '
 
 class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
